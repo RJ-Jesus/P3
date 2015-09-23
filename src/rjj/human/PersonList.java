@@ -1,4 +1,4 @@
-package human;
+package rjj.human;
 
 import java.util.Comparator;
 import java.util.LinkedList;

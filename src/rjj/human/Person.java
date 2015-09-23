@@ -1,4 +1,4 @@
-package human;
+package rjj.human;
 
 import rjj.util.Date;
 

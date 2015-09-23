@@ -1,7 +1,7 @@
 package L_01;
 
-import human.Person;
-import human.PersonList;
+import rjj.human.Person;
+import rjj.human.PersonList;
 import rjj.util.Date;
 
 import java.util.InputMismatchException;
