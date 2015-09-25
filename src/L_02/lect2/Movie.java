@@ -36,6 +36,22 @@ public class Movie {
         return age;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Movie movie = (Movie) o;
+
+        return getId() == movie.getId();
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
+    }
+
     public enum Category {
         Action,
         Adventure,
@@ -58,7 +74,7 @@ public class Movie {
         Speculative,
         Thriller,
         Urban,
-        Other
+        Other;
     }
 
     public enum Age {

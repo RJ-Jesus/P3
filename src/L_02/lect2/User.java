@@ -22,4 +22,20 @@ public class User extends rjj.human.Person {
     public Date getJoiningDate() {
         return joiningDate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return getId() == user.getId();
+
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
+    }
 }
