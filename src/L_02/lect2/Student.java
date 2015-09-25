@@ -12,6 +12,8 @@ public class Student extends User {
             throw new IllegalArgumentException("Course can't be null.");
         if(nMec < 0)
             throw new IllegalArgumentException("Nº Mec can't be negative.");
+        if (nMec > 99999)
+            throw new IllegalArgumentException("Nº Mec is only a 5 digit long value for now.");
         this.nMec = nMec;
         this.course = course;
     }

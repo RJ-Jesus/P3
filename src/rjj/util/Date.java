@@ -1,6 +1,6 @@
 package rjj.util;
 
-import java.util.IllegalFormatCodePointException;
+import java.util.Calendar;
 
 public class Date {
     private int day, month, year;
@@ -41,6 +41,11 @@ public class Date {
 
     private static boolean isLeapYear(final int year) {
         return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+    }
+
+    public static Date today() {
+        Calendar cal = Calendar.getInstance();
+        return new Date(cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR));
     }
 
     public int getDay() {

@@ -30,12 +30,12 @@ public class User extends rjj.human.Person {
 
         User user = (User) o;
 
-        return getId() == user.getId();
+        return id == user.id;
 
     }
 
     @Override
     public int hashCode() {
-        return getId();
+        return id;
     }
 }

@@ -3,19 +3,19 @@ package L_02.lect2;
 public class Movie {
     private static int counter;
     private final int id;
-    private String name;
+    private String title;
     private Category category;
     private Age age;
 
-    public Movie(final String name, final Category category, final Age age) {
-        if(name == null)
+    public Movie(final String title, final Category category, final Age age) {
+        if (title == null)
             throw new IllegalArgumentException("Name can't be null.");
         if(category == null)
             throw new IllegalArgumentException("Category can't be null.");
         if(age == null)
             throw new IllegalArgumentException("Age can't be null.");
         id = counter++;
-        this.name = name;
+        this.title = title;
         this.category = category;
         this.age = age;
     }
@@ -24,8 +24,8 @@ public class Movie {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public Category getCategory() {
@@ -43,13 +43,13 @@ public class Movie {
 
         Movie movie = (Movie) o;
 
-        return getId() == movie.getId();
+        return id == movie.id;
 
     }
 
     @Override
     public int hashCode() {
-        return getId();
+        return id;
     }
 
     public enum Category {
@@ -74,7 +74,7 @@ public class Movie {
         Speculative,
         Thriller,
         Urban,
-        Other;
+        Other
     }
 
     public enum Age {
