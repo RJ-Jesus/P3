@@ -25,4 +25,9 @@ public class Student extends User {
     public String getCourse() {
         return course;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Nº Mec: " + nMec + ", Course: " + course;
+    }
 }

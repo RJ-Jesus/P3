@@ -24,4 +24,9 @@ public class Worker extends User {
     public int getNIF() {
         return NIF;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Nº Worker: " + nWorker + ", N.I.F.: " + NIF;
+    }
 }

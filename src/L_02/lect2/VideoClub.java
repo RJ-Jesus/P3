@@ -53,6 +53,17 @@ public class VideoClub {
         return movies.values().toArray(new Movie[movies.size()]);
     }
 
+    public boolean checkIn(final int movieId) {
+        if (!containsMovie(movieId))
+            throw new NoSuchElementException("Movie doesn't exist.");
+        for (Requisition r : requisitions)
+            if (r.getMovieId() == movieId && r.isActive()) {
+                r.checkIn();
+                return true;
+            }
+        return false;
+    }
+
     public boolean checkOut(final int movieId, final int userId) {
         if (!containsMovie(movieId))
             throw new NoSuchElementException("Movie doesn't exist.");

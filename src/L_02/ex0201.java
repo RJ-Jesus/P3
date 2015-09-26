@@ -12,7 +12,49 @@ public class ex0201 {
     static VideoClub vClub = new VideoClub();
 
     public static void main(String[] args) {
-
+        boolean repeat = true;
+        while (repeat) {
+            switch (menu()) {
+                case 1:
+                    addUser();
+                    break;
+                case 2:
+                    removeUser();
+                    break;
+                case 3:
+                    listUsers();
+                    break;
+                case 4:
+                    whoRequestedMovie();
+                    break;
+                case 5:
+                    addMovie();
+                    break;
+                case 6:
+                    removeMovie();
+                    break;
+                case 7:
+                    listMovies();
+                    break;
+                case 8:
+                    wereRequestedByUser();
+                    break;
+                case 9:
+                    movieIsAvailable();
+                    break;
+                case 10:
+                    checkIn();
+                    break;
+                case 11:
+                    checkOut();
+                    break;
+                case 0:
+                    repeat = false;
+                    break;
+                default:
+                    System.err.println("Something odd happened. Please repeat.");
+            }
+        }
     }
 
     public static int menu() {
@@ -22,7 +64,9 @@ public class ex0201 {
                 " 9 - Check if given movie is available", "10 - Check-in  a movie", "11 - Checkout a movie",
                 " 0 - Exit"
         };
-        return Validate.getInRange("command: ", 0, options.length);
+        for (String s : options)
+            System.out.println(s);
+        return Validate.getInRange(sc, "command: ", 0, options.length);
     }
 
     public static void addUser() {
@@ -40,21 +84,21 @@ public class ex0201 {
         System.out.println("* Creating a '" + typeOfUser + "' *");
         System.out.print("Name: ");
         String name = sc.nextLine();
-        int ccNumber = Validate.getInRange("C.C. number: ", 0, 99999999);
+        int ccNumber = Validate.getInRange(sc, "C.C. number: ", 0, 99999999);
         System.out.println("Birthday");
         Date birthday = newDate();
         Date joiningDate = Date.today();
         User toReturn = null;
         switch (typeOfUser) {
             case "student":
-                int nMec = Validate.getInRange("Nº Mec: ", 0, 99999);
+                int nMec = Validate.getInRange(sc, "Nº Mec: ", 0, 99999);
                 System.out.print("Course: ");
                 String course = sc.nextLine();
                 toReturn = new Student(name, ccNumber, birthday, joiningDate, nMec, course);
                 break;
             case "worker":
-                int nWorker = Validate.getInRange("Nº Worker: ", 0, Integer.MAX_VALUE);
-                int NIF = Validate.getInRange("N.I.F.: ", 0, 999999999);
+                int nWorker = Validate.getInRange(sc, "Nº Worker: ", 0, Integer.MAX_VALUE);
+                int NIF = Validate.getInRange(sc, "N.I.F.: ", 0, 999999999);
                 toReturn = new Worker(name, ccNumber, birthday, joiningDate, nWorker, NIF);
                 break;
             default:
@@ -119,6 +163,10 @@ public class ex0201 {
         System.out.println(vClub.isRequested(getMovieId()) ? "Not available." : "Available.");
     }
 
+    public static void checkIn() {
+        vClub.checkIn(getMovieId());
+    }
+
     public static void checkOut() {
         vClub.checkOut(getMovieId(), getUserId());
     }
@@ -141,7 +189,7 @@ public class ex0201 {
                 }
             }
             if (vClub.containsMovie(movieId)) return movieId;
-            else System.err.println("Not a valid user. Please try again.");
+            else System.err.println("Not a valid movie. Please try again.");
         }
     }
 
@@ -150,12 +198,12 @@ public class ex0201 {
         while (true) {
             String in;
             while (true) {
-                System.out.print("User ID ('l' to list all movies): ");
+                System.out.print("User ID ('l' to list all users): ");
                 in = sc.nextLine();
                 try {
                     userId = Integer.parseInt(in);
                     break;
-                } catch (InputMismatchException e) {
+                } catch (InputMismatchException | NumberFormatException e) {
                     if (in.equals("l")) listUsers();
                     else {
                         System.err.println("Invalid option: " + in);
