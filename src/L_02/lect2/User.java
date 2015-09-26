@@ -6,6 +6,7 @@ public class User extends rjj.human.Person {
     private static int counter;
     private final int id;
     private Date joiningDate;
+    private int numberOfRequisitions;
 
     public User(final String name, final int ccNumber, final Date birthday, final Date joiningDate) {
         super(name, ccNumber, birthday);
@@ -21,6 +22,36 @@ public class User extends rjj.human.Person {
 
     public Date getJoiningDate() {
         return joiningDate;
+    }
+
+    public void requestedMovie() {
+        numberOfRequisitions++;
+    }
+
+    public void deliveredMovie() {
+        if (numberOfRequisitions <= 0)
+            throw new IllegalStateException("Can't hand in more movies than those requested.");
+        numberOfRequisitions--;
+    }
+
+    public int getNumberOfRequisitions() {
+        return numberOfRequisitions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return id == user.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 
     @Override

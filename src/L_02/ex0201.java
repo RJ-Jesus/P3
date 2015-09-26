@@ -9,9 +9,12 @@ import java.util.Scanner;
 
 public class ex0201 {
     static final Scanner sc = new Scanner(System.in);
-    static VideoClub vClub = new VideoClub();
+    static VideoClub vClub;
 
     public static void main(String[] args) {
+
+        vClub = new VideoClub(Validate.getInRange(sc, "Maximum requisitions per user: ", 1, Integer.MAX_VALUE));
+
         boolean repeat = true;
         while (repeat) {
             switch (menu()) {
@@ -48,6 +51,12 @@ public class ex0201 {
                 case 11:
                     checkOut();
                     break;
+                case 12:
+                    getRatingOfMovie();
+                    break;
+                case 13:
+                    listMoviesSortedByRating();
+                    break;
                 case 0:
                     repeat = false;
                     break;
@@ -62,6 +71,7 @@ public class ex0201 {
                 " 1 - Add user", " 2 - Remove user", " 3 - List users", " 4 - List users who requested given movie",
                 " 5 - Add movie", " 6 - Remove movie", " 7 - List movies", " 8 - List movies requested by given user",
                 " 9 - Check if given movie is available", "10 - Check-in  a movie", "11 - Checkout a movie",
+                "12 - Get rating of a given movie", "13 - List movies sorted by rating",
                 " 0 - Exit"
         };
         for (String s : options)
@@ -121,7 +131,7 @@ public class ex0201 {
 
     public static void whoRequestedMovie() {
         int movieId = getMovieId();
-        System.out.println("* Users who requested: " + movieId + " *");
+        System.out.println("* Users who requested movie # " + movieId + " *");
         for (User u : vClub.whoRequestedMovie(movieId))
             System.out.println(u);
     }
@@ -154,9 +164,9 @@ public class ex0201 {
 
     public static void wereRequestedByUser() {
         int userId = getUserId();
-        System.out.println("* Movies that were requested by user #: " + userId + " *");
+        System.out.println("* Movies that were requested by user # " + userId + " *");
         for (Movie m : vClub.wereRequestedByUser(userId))
-            System.out.println(m);
+            System.out.println(m + (vClub.isRequested(m.getId()) ? " - Active." : " - Not active."));
     }
 
     public static void movieIsAvailable() {
@@ -164,7 +174,7 @@ public class ex0201 {
     }
 
     public static void checkIn() {
-        vClub.checkIn(getMovieId());
+        vClub.checkIn(getMovieId(), Validate.getInRange(sc, "Rating (1-10): ", 1, 10));
     }
 
     public static void checkOut() {
@@ -230,5 +240,15 @@ public class ex0201 {
                 System.err.println("Please enter a valid date.");
             }
         }
+    }
+
+    public static void getRatingOfMovie() {
+        System.out.println("Rating (average): " + vClub.averageRatingOf(getMovieId()));
+    }
+
+    public static void listMoviesSortedByRating() {
+        System.out.println("* Sorted movies *");
+        for (Movie m : vClub.getMoviesSortedByRating())
+            System.out.println(m);
     }
 }

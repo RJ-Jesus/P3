@@ -6,6 +6,8 @@ public class Movie {
     private String title;
     private Category category;
     private Age age;
+    private int totalRating;
+    private int nReviews;
 
     public Movie(final String title, final Category category, final Age age) {
         if (title == null)
@@ -36,9 +38,40 @@ public class Movie {
         return age;
     }
 
+    public void addReview(final int rating) {
+        if (rating < 1 || rating > 10)
+            throw new IllegalArgumentException("Rating has to be in integer between 1 and 10.");
+        totalRating += rating;
+        nReviews++;
+    }
+
+    public int getTotalRating() {
+        return totalRating;
+    }
+
+    public double getAverageRating() {
+        return nReviews > 0 ? totalRating / nReviews : 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Movie movie = (Movie) o;
+
+        return id == movie.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
     @Override
     public String toString() {
-        return "# " + id + " - Title: " + title + ", " + category + ", " + age;
+        return "# " + id + " - Title: " + title + ", " + category + ", " + age + ". Rating (average): " + getAverageRating();
     }
 
     public enum Category {
