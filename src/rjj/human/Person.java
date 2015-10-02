@@ -13,7 +13,7 @@ public class Person {
         if(ccNumber < 0 || ccNumber > 99999999)
             throw new IllegalArgumentException("Invalid citizen's card number.");
         if(birthday == null)
-            throw new IllegalArgumentException("Birthdate is null.");
+            throw new IllegalArgumentException("Birthday is null.");
         this.name = name;
         this.ccNumber = ccNumber;
         this.birthday = birthday;

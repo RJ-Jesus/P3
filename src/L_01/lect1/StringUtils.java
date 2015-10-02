@@ -3,7 +3,7 @@ package L_01.lect1;
 public class StringUtils {
     private char[] s;
 
-    public StringUtils(String s) {
+    public StringUtils(final String s) {
         if (s == null)
             throw new IllegalArgumentException("String is null.");
         this.s = s.toCharArray();
@@ -11,21 +11,21 @@ public class StringUtils {
 
     public int getNumberDigits() {
         int counter = 0;
-        for (char c : s)
+        for (final char c : s)
             if (Character.isDigit(c))
                 counter++;
         return counter;
     }
 
     public boolean isLowerCase() {
-        for (char c : s)
+        for (final char c : s)
             if (Character.isUpperCase(c))
                 return false;
         return true;
     }
 
     public boolean isUpperCase() {
-        for (char c : s)
+        for (final char c : s)
             if (Character.isLowerCase(c))
                 return false;
         return true;

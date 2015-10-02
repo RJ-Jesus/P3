@@ -59,7 +59,7 @@ public class VideoClub {
             throw new NoSuchElementException("Movie doesn't exist.");
         if (rating < 1 || rating > 10)
             throw new IllegalArgumentException("Rating value must be an integer between 1 and 10.");
-        for (Requisition r : requisitions)
+        for (final Requisition r : requisitions)
             if (r.getMovieId() == movieId && r.isActive()) {
                 movies.get(movieId).addReview(rating);
                 users.get(r.getUserId()).deliveredMovie();
@@ -85,7 +85,7 @@ public class VideoClub {
     public boolean isRequested(final int movieId) {
         if (!containsMovie(movieId))
             throw new NoSuchElementException("Movie doesn't exist.");
-        for (Requisition r : requisitions)
+        for (final Requisition r : requisitions)
             if (r.getMovieId() == movieId && r.isActive())
                 return true;
         return false;

@@ -1,7 +1,7 @@
 package L_01;
 
 import rjj.geometry.Circle;
-import rjj.geometry.Point2D;
+import rjj.geometry.Point;
 import rjj.geometry.Rectangle;
 import rjj.geometry.Square;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class ex0103 {
     static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        Point2D center;
+        Point center;
         System.out.print("Shape (circle, rectangle, square): ");
         switch (sc.nextLine().toLowerCase()) {
             case "circle":
@@ -25,7 +25,7 @@ public class ex0103 {
                 center = newCenter();
                 System.out.print("Height: ");
                 double height = sc.nextDouble();
-                System.out.print("Wdith: ");
+                System.out.print("Width: ");
                 double width = sc.nextDouble();
                 Rectangle r = new Rectangle(center, height, width);
                 System.out.println("Area: " + r.area());
@@ -45,12 +45,12 @@ public class ex0103 {
         }
     }
 
-    public static Point2D newCenter() {
+    public static Point newCenter() {
         System.out.println("Center");
         System.out.print("x: ");
         double x = sc.nextDouble();
         System.out.print("y: ");
         double y = sc.nextDouble();
-        return new Point2D(x, y);
+        return new Point(x, y);
     }
 }

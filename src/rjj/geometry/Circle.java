@@ -1,19 +1,23 @@
 package rjj.geometry;
 
+import rjj.util.Validate;
+
 public class Circle extends Shape {
     private double radius;
 
-    public Circle(final Point2D center, final double radius) {
-        if (center == null)
-            throw new IllegalArgumentException("Center is null.");
-        if (radius <= 0)
-            throw new IllegalArgumentException("Radius must be a positive value.");
-        this.center = center;
-        this.radius = radius;
+    public Circle(final Circle other) {
+        this(new Point(Validate.notNull(other, "Circle is null.").getCenter().getX(), other.getCenter().getY()), other.getRadius());
     }
 
-    public Circle(final double x, final double y, final double radius) {
-        this(new Point2D(x, y), radius);
+    public Circle(final double radius) {
+        this(new Point(0, 0), radius);
+    }
+
+    public Circle(final Point center, final double radius) {
+        super(center);
+        if (radius <= 0)
+            throw new IllegalArgumentException("Radius must be a positive value.");
+        this.radius = radius;
     }
 
     @Override
@@ -32,7 +36,7 @@ public class Circle extends Shape {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -51,7 +55,7 @@ public class Circle extends Shape {
         return radius;
     }
 
-    public boolean intercept(Circle c) {
+    public boolean intercept(final Circle c) {
         return c != null && getCenter().distanceTo(c.getCenter()) <= getRadius() + c.getRadius();
     }
 }

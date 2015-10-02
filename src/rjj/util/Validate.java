@@ -3,9 +3,10 @@ package rjj.util;
 import java.util.Scanner;
 
 public class Validate {
-    public static void notNull(final Object o, final String msg) {
-        if (o == null)
+    public static <T> T notNull(final T t, final String msg) {
+        if (t == null)
             throw new IllegalArgumentException(msg);
+        return t;
     }
 
     public static int getInRange(final Scanner sc, final String msg, final int min, final int max) {

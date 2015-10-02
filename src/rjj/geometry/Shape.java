@@ -1,18 +1,24 @@
 package rjj.geometry;
 
 public abstract class Shape {
-    protected Point2D center;
+    private Point center;
+
+    public Shape(final Point center) {
+        if (center == null)
+            throw new IllegalArgumentException("Center is null.");
+        this.center = center;
+    }
 
     abstract public double area();
 
     abstract public double perimeter();
 
-    public Point2D getCenter() {
+    public Point getCenter() {
         return center;
     }
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "| Center: " + center;
+        return getClass().getSimpleName() + " Center: " + center;
     }
 }
