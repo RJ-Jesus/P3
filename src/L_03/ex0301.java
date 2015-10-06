@@ -12,7 +12,7 @@ public class ex0301 {
         res.setScholarship(745);
         System.out.println("Student: " + stu.getName());
         System.out.println(stu);
-        System.out.println("Researcher: " + res.getName() + ", Nº Mec.: " + res.getNNec() + ", Scholarship: " + res.getScholarship());
+        System.out.println("Researcher: " + res.getName() + ", Nº Mec.: " + res.getNMec() + ", Scholarship: " + res.getScholarship());
         System.out.println(res);
     }
 }
