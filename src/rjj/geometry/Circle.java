@@ -35,27 +35,32 @@ public class Circle extends Shape {
         return super.toString() + ", Radius: " + radius;
     }
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Circle circle = (Circle) o;
-
-        return Double.compare(circle.getRadius(), getRadius()) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-        long temp = Double.doubleToLongBits(getRadius());
-        return (int) (temp ^ (temp >>> 32));
-    }
-
     public double getRadius() {
         return radius;
     }
 
     public boolean intercept(final Circle c) {
         return c != null && getCenter().distanceTo(c.getCenter()) <= getRadius() + c.getRadius();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Circle circle = (Circle) o;
+
+        return Double.compare(circle.radius, radius) == 0;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        long temp;
+        temp = Double.doubleToLongBits(radius);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }

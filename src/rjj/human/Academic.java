@@ -28,6 +28,21 @@ public class Academic extends Person {
     @Override
     public String toString() {
         return super.toString() + ", Nº Mec.: " + getNMec() + ", joined at " + getJoiningDate();
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Academic academic = (Academic) o;
+
+        return nMec == academic.nMec;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return nMec;
     }
 }

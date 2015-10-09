@@ -21,4 +21,20 @@ public abstract class Shape {
     public String toString() {
         return getClass().getSimpleName() + " Center: " + center;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Shape shape = (Shape) o;
+
+        return !(center != null ? !center.equals(shape.center) : shape.center != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return center != null ? center.hashCode() : 0;
+    }
 }
