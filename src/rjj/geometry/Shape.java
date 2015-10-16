@@ -1,6 +1,8 @@
 package rjj.geometry;
 
-public abstract class Shape {
+import rjj.util.Validate;
+
+public abstract class Shape implements Comparable<Shape> {
     private Point center;
 
     public Shape(final Point center) {
@@ -36,5 +38,10 @@ public abstract class Shape {
     @Override
     public int hashCode() {
         return center != null ? center.hashCode() : 0;
+    }
+
+    public int compareTo(Shape s) {
+        Validate.notNull(s, "Shape to compare to is null.");
+        return Double.compare(this.area(), s.area());
     }
 }

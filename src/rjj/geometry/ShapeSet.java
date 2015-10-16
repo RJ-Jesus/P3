@@ -1,8 +1,8 @@
 package rjj.geometry;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
-public class ShapeSet extends HashSet<Shape> {
+public class ShapeSet extends LinkedHashSet<Shape> {
     private final double maxArea;
     private double currentArea;
 

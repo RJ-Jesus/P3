@@ -1,4 +1,4 @@
-package L_03.lect3;
+package rjj.vehicle;
 
 import rjj.human.Person;
 import rjj.util.Date;
