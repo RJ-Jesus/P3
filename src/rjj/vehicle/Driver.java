@@ -7,7 +7,7 @@ public class Driver extends Person {
     private License license;
 
     public Driver(final String name, final int cCardNumber, final Date birthday, final License license) {
-        super(name, cCardNumber, birthday);
+        super(name, cCardNumber, birthday, 0);
         if (license == null)
             throw new IllegalArgumentException("License is null.");
         this.license = license;

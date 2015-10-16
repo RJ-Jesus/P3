@@ -12,7 +12,7 @@ public class Academic extends Person {
     }
 
     public Academic(final String name, final int ccNumber, final Date birthday, final Date joiningDate) {
-        super(name, ccNumber, birthday);
+        super(name, ccNumber, birthday, 0);
         nMec = counter++;
         this.joiningDate = joiningDate;
     }
@@ -31,7 +31,7 @@ public class Academic extends Person {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 

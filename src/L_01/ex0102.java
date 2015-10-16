@@ -49,7 +49,7 @@ public class ex0102 {
             try {
                 System.out.print("command: ");
                 return Integer.parseInt(sc.nextLine());
-            } catch (InputMismatchException e) {
+            } catch (final InputMismatchException e) {
                 System.err.println("Invalid input.");
             }
         }
@@ -62,8 +62,8 @@ public class ex0102 {
             System.out.print("CCNumber: ");
             int ccNumber = Integer.parseInt(sc.nextLine());
             Date birthday = newDate();
-            l.add(new Person(name, ccNumber, birthday));
-        } catch (InputMismatchException e) {
+            l.add(new Person(name, ccNumber, birthday, 0));
+        } catch (final InputMismatchException e) {
             System.err.println("Invalid input. Couldn't add person to list.");
         }
 
@@ -79,10 +79,10 @@ public class ex0102 {
             System.out.print("Year: ");
             int year = Integer.parseInt(sc.nextLine());
             return new Date(day, month, year);
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             System.err.println("Invalid date. Couldn't instantiate date object.");
             return null;
-        } catch (InputMismatchException e) {
+        } catch (final InputMismatchException e) {
             System.err.println("Invalid input. Couldn't instantiate date object.");
             return null;
         }
@@ -93,9 +93,9 @@ public class ex0102 {
             System.out.print("Index of person in list: ");
             int idx = Integer.parseInt(sc.nextLine());
             l.remove(idx);
-        } catch (InputMismatchException e) {
+        } catch (final InputMismatchException e) {
             System.err.println("Invalid input. Couldn't remove person from list.");
-        } catch (IndexOutOfBoundsException e) {
+        } catch (final IndexOutOfBoundsException e) {
             System.err.println("Invalid index. Couldn't remove person from list.");
         }
     }

@@ -191,7 +191,7 @@ public class ex0201 {
                 try {
                     movieId = Integer.parseInt(in);
                     break;
-                } catch (InputMismatchException e) {
+                } catch (final InputMismatchException e) {
                     if (in.equals("l")) listMovies();
                     else {
                         System.err.println("Invalid option: " + in);
@@ -235,7 +235,7 @@ public class ex0201 {
                 System.out.print("Year: ");
                 int year = Integer.parseInt(sc.nextLine());
                 return new Date(day, month, year);
-            } catch (IllegalArgumentException e) {
+            } catch (final IllegalArgumentException e) {
                 System.err.println(e.getMessage());
                 System.err.println("Please enter a valid date.");
             }

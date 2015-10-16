@@ -48,6 +48,19 @@ public class Date {
         return new Date(cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.YEAR));
     }
 
+    public static Date fromString(final String date) {
+        if (date == null)
+            throw new NullPointerException("Date String is null.");
+        try {
+            String[] parts = date.split("\\D");
+            int day = Integer.parseInt(parts[0]), month = Integer.parseInt(parts[1]), year = Integer.parseInt(parts[2]);
+            return new Date(day, month, year);
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            e.printStackTrace();
+            throw new IllegalArgumentException("Can't build a new Date from the given String.");
+        }
+    }
+
     public int getDay() {
         return day;
     }

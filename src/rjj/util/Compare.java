@@ -24,11 +24,11 @@ public class Compare {
         return rtn;
     }
 
-    public static <E extends Comparable<? super E>> void sortArray(E[] arr) {
+    public static <E extends Comparable<? super E>> void sortArray(final E[] arr) {
         sortArray(arr, 0, arr.length);
     }
 
-    private static <E extends Comparable<? super E>> void sortArray(E[] arr, final int start, final int end) {
+    private static <E extends Comparable<? super E>> void sortArray(final E[] arr, final int start, final int end) {
         if (end - start > 1) {
             int mid = (end + start) / 2;
             sortArray(arr, start, mid);
@@ -37,7 +37,7 @@ public class Compare {
         }
     }
 
-    private static <E extends Comparable<? super E>> void sortArray(E[] arr, final int start, final int mid, final int end) {
+    private static <E extends Comparable<? super E>> void sortArray(final E[] arr, final int start, final int mid, final int end) {
         @SuppressWarnings("unchecked")
         E[] brr = (E[]) Array.newInstance(arr.getClass().getComponentType(), end - start);
         int i = start, j = mid, k = 0;

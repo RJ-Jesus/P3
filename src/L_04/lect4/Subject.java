@@ -64,7 +64,7 @@ public class Subject {
                     l.add(stu);*/
             l.addAll(students.stream().filter(c::isInstance).collect(Collectors.toList()));
             return l.toArray(new Student[l.size()]);
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             return null;
         }
     }

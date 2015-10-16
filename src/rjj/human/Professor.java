@@ -4,7 +4,7 @@ import rjj.util.Date;
 
 public class Professor extends Academic {
 
-    public Professor(String name, int ccNumber, Date birthday) {
+    public Professor(final String name, final int ccNumber, final Date birthday) {
         super(name, ccNumber, birthday, Date.today());
     }
 

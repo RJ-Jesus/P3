@@ -25,7 +25,7 @@ public abstract class Shape implements Comparable<Shape> {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -40,7 +40,8 @@ public abstract class Shape implements Comparable<Shape> {
         return center != null ? center.hashCode() : 0;
     }
 
-    public int compareTo(Shape s) {
+    @Override
+    public int compareTo(final Shape s) {
         Validate.notNull(s, "Shape to compare to is null.");
         return Double.compare(this.area(), s.area());
     }
