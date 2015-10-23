@@ -1,6 +1,7 @@
 package rjj.util;
 
 import java.util.Calendar;
+import java.util.Random;
 
 public class Date {
     private int day, month, year;
@@ -76,5 +77,16 @@ public class Date {
     @Override
     public String toString() {
         return String.format("%02d-%02d-%04d", day, month, year);
+    }
+
+    public enum DayOfWeek {
+        SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY;
+
+        public static final int size = values().length;
+        private static final Random rand = new Random();
+
+        public static DayOfWeek rand() {
+            return values()[rand.nextInt(size)];
+        }
     }
 }
