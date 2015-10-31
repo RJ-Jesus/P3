@@ -5,6 +5,12 @@ import java.util.Objects;
 public class Time implements Comparable<Time> {
     private long seconds;
 
+    public Time(final long time) {
+        if(time < 0 || time > 24 * 3600 - 1)
+            throw new IllegalArgumentException("Invalid time stamp.");
+        this.seconds = time;
+    }
+
     public Time(final int hour, final int minute, final int second) {
         if (hour < 0 || hour > 23)
             throw new IllegalArgumentException("Invalid hour.");

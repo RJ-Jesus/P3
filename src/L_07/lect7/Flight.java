@@ -8,14 +8,14 @@ public class Flight {
     private Time time;
     private AirLine airLine;
     private int flightNumber;
-    private String string;
+    private String origin;
     private Time delay;
 
-    public Flight(Time time, AirLine airLine, int flightNumber, String string) {
+    public Flight(Time time, AirLine airLine, int flightNumber, String origin) {
         this.time = Objects.requireNonNull(time);
         this.airLine = Objects.requireNonNull(airLine);
         this.flightNumber = Objects.requireNonNull(flightNumber);
-        this.string = Objects.requireNonNull(string);
+        this.origin = Objects.requireNonNull(origin);
         this.delay = new Time(0, 0, 0);
     }
 
@@ -31,8 +31,8 @@ public class Flight {
         return flightNumber;
     }
 
-    public String getString() {
-        return string;
+    public String getOrigin() {
+        return origin;
     }
 
     public Time getDelay() {
