@@ -1,11 +1,11 @@
-package L_07.lect7;
+package L_07.lect7.ex01;
 
 import java.util.Objects;
 
 public class AirLine implements Comparable<AirLine> {
     private String name, initials;
 
-    public AirLine(final String name, final String initials) {
+    public AirLine(final String initials, final String name) {
         this.name = Objects.requireNonNull(name);
         this.initials = Objects.requireNonNull(initials);
     }
@@ -19,22 +19,24 @@ public class AirLine implements Comparable<AirLine> {
     }
 
     @Override
+    public String toString() {
+        return initials + " - " + name;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         AirLine airLine = (AirLine) o;
 
-        return !(name != null ? !name.equals(airLine.name) : airLine.name != null) &&
-                !(initials != null ? !initials.equals(airLine.initials) : airLine.initials != null);
+        return initials.equals(airLine.initials);
 
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (initials != null ? initials.hashCode() : 0);
-        return result;
+        return initials.hashCode();
     }
 
     @Override

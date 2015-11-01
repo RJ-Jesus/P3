@@ -1,6 +1,7 @@
 package rjj.util;
 
 import java.lang.reflect.Array;
+import java.util.*;
 
 public class Compare {
 
@@ -48,5 +49,19 @@ public class Compare {
         while (j < end)
             brr[k++] = arr[j++];
         System.arraycopy(brr, 0, arr, start, end - start);
+    }
+
+    public static class MapUtil
+    {
+        public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+            List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
+            Collections.sort(list, (o1, o2) -> (o1.getValue()).compareTo(o2.getValue()));
+
+            Map<K, V> rtn = new LinkedHashMap<>();
+            for (Map.Entry<K, V> entry : list) {
+                rtn.put(entry.getKey(), entry.getValue());
+            }
+            return rtn;
+        }
     }
 }

@@ -46,7 +46,7 @@ public class Time implements Comparable<Time> {
     }
 
     public long getMinutes() {
-        return seconds / 60;
+        return (seconds - getHours() * 3600) / 60;
     }
 
     public long getSeconds() {
@@ -58,9 +58,17 @@ public class Time implements Comparable<Time> {
         this.seconds = (this.seconds + t.seconds) % (24 * 3600 - 1);
     }
 
+    public static Time averageTime(final Time... t) {
+        if(t.length == 0)
+            return null;
+        Time rtn = addTimes(t);
+        rtn.seconds = Math.round((double) rtn.seconds / t.length);
+        return rtn;
+    }
+
     @Override
     public String toString() {
-        return getHours() + ":" + getMinutes() + ":" + getSeconds();
+        return String.format("%02d:%02d:%02d", getHours(), getMinutes(), getSeconds());
     }
 
     @Override
