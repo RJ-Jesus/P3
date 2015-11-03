@@ -1,4 +1,4 @@
-package L_07.lect7.ex01;
+package L_07.lect7;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

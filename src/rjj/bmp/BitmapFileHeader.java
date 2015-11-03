@@ -1,4 +1,4 @@
-package L_07.lect7.ex02;
+package rjj.bmp;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -11,7 +11,7 @@ public class BitmapFileHeader {
 	private short reserved1;
 	private int offBits;
 
-	public BitmapFileHeader(byte[] arr) {
+	public BitmapFileHeader(final byte[] arr) {
 		if (arr.length != 14)
 			throw new IllegalArgumentException("Bitmap File Header is 14 bytes long.");
 		ByteBuffer bo = ByteBuffer.wrap(arr).order(ByteOrder.LITTLE_ENDIAN);
@@ -42,23 +42,23 @@ public class BitmapFileHeader {
 		return offBits;
 	}
 
-	void setType(short type) {
+	void setType(final short type) {
 		this.type = type;
 	}
 
-	void setSize(int size) {
+	void setSize(final int size) {
 		this.size = size;
 	}
 
-	void setRes1(short reserved1) {
+	void setRes1(final short reserved1) {
 		this.reserved1 = reserved1;
 	}
 
-	void setRes0(short reserved0) {
+	void setRes0(final short reserved0) {
 		this.reserved0 = reserved0;
 	}
 
-	void setOffBits(int offBits) {
+	void setOffBits(final int offBits) {
 		this.offBits = offBits;
 	}
 

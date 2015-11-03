@@ -1,25 +1,30 @@
-package L_07.lect7.ex02;
+package rjj.bmp;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class Bitmap {
 	private BitmapFileHeader bfh;
 	private BitmapInfoHeader bih;
 	private byte[][] colorPalette;
 	private byte[][] pixelData;
+	private String path;
+	private double relationToOriginal;
 
-	public Bitmap(String fname) throws IOException {
+	public Bitmap(final String fname) throws IOException {
 		this(new File(fname));
 	}
 
-	public Bitmap(File f) throws IOException {
+	public Bitmap(final File f) throws IOException {
 		this(new FileInputStream(f));
+		path = f.getAbsolutePath();
 	}
 
-	public Bitmap(FileInputStream f) throws IOException {
+	public Bitmap(final FileInputStream f) throws IOException {
 		byte[] bStream = new byte[BitmapFileHeader.SIZE];
 		f.read(bStream);
 		bfh = new BitmapFileHeader(bStream);
@@ -42,6 +47,7 @@ public class Bitmap {
 			f.read(bStream);
 			pixelData[i] = bStream;
 		}
+		relationToOriginal = 1;
 	}
 
 	@Override
@@ -50,24 +56,27 @@ public class Bitmap {
 
 	}
 
-	public void saveRawData(String fname) throws IOException {
+	public void saveRawData(final String fname) throws IOException {
 		saveRawData(new File(fname));
 	}
 
-	public void saveRawData(File f) throws IOException {
+	public void saveRawData(final File f) throws IOException {
 		saveRawData(new FileOutputStream(f));
 	}
 
-	public void saveRawData(FileOutputStream f) throws IOException {
+	public void saveRawData(final FileOutputStream f) throws IOException {
 		for (byte[] row : pixelData)
 			f.write(row);
 		f.flush();
 	}
 
-	public void resize(double v) {
-		if (v > 1)
+	public void resize(final double v) {
+		if (v < 0)
+			throw new IllegalArgumentException();
+		else if (v > 1)
 			throw new UnsupportedOperationException(
 					"Currently it's only possible to resize the image to a smaller size.");
+		relationToOriginal *= v;
 		double r = Math.sqrt(v);
 		int nCols = (int) (bih.width() * r);
 		int nRows = (int) Math.abs(bih.height() * r);
@@ -101,7 +110,7 @@ public class Bitmap {
 		this.pixelData = pData;
 	}
 
-	public void flip() {
+	public void flipVertical() {
 		for (int i = 0; i < pixelData.length >> 1; i++) {
 			byte[] tmp = pixelData[i];
 			pixelData[i] = pixelData[pixelData.length - 1 - i];
@@ -109,15 +118,25 @@ public class Bitmap {
 		}
 	}
 
-	public void save(String fname) throws IOException {
+	public void flipHorizontal() {
+		for (byte[] row : pixelData)
+			for (int i = 0; i < row.length >> 1; i += 3) {
+				byte[] tmp = Arrays.copyOfRange(row, i, i + 3);
+				System.arraycopy(row, row.length - i - 3, row, i, 3);
+				System.arraycopy(tmp, 0, row, row.length - i - 3, 3);
+			}
+
+	}
+
+	public void save(final String fname) throws IOException {
 		save(new File(fname));
 	}
 
-	public void save(File f) throws IOException {
+	public void save(final File f) throws IOException {
 		save(new FileOutputStream(f));
 	}
 
-	public void save(FileOutputStream f) throws IOException {
+	public void save(final FileOutputStream f) throws IOException {
 		f.write(bfh.toArray());
 		f.write(bih.toArray());
 		for (byte[] cp : colorPalette)
@@ -125,6 +144,44 @@ public class Bitmap {
 		for (int i = pixelData.length - 1; i >= 0; i--)
 			f.write(pixelData[i]);
 		f.flush();
+	}
+
+	public BufferedImage toBufferedImage() {
+		BufferedImage picture = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
+		picture.setRGB(0, 0, getWidth(), getHeight(), byteArrayToIntArray(byteData()), 0, getWidth());
+		return picture;
+	}
+
+	private static int[] byteArrayToIntArray(final byte[] arr) {
+		int[] rtn = new int[arr.length / 3];
+		for (int i = 0; i < rtn.length; i++)
+			rtn[i] = (-1 << 24) | ((0xFF & arr[i * 3 + 2]) << 16) | ((0xFF & arr[i * 3 + 1]) << 8)
+					| (0xFF & (arr[i * 3]));
+		return rtn;
+	}
+
+	public byte[] byteData() {
+		byte[] rtn = new byte[pixelData.length * pixelData[0].length];
+		for (int i = pixelData.length - 1, k = 0, j; i >= 0; i--)
+			for (j = 0; j < pixelData[0].length; j++)
+				rtn[k++] = pixelData[i][j];
+		return rtn;
+	}
+
+	public int getWidth() {
+		return bih.width();
+	}
+
+	public int getHeight() {
+		return Math.abs(bih.height());
+	}
+	
+	public double getRelation(){
+		return relationToOriginal;
+	}
+
+	public String getPath() {
+		return path;
 	}
 
 }

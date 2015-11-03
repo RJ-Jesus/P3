@@ -1,4 +1,4 @@
-package L_07.lect7.ex02;
+package rjj.bmp;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -17,7 +17,7 @@ public class BitmapInfoHeader {
 	private int colorUsed;
 	private int colorImportant;
 
-	public BitmapInfoHeader(byte[] arr) {
+	public BitmapInfoHeader(final byte[] arr) {
 		if (arr.length != 40)
 			throw new IllegalArgumentException("Bitmap Info Header is 40 bytes long.\n");
 		ByteBuffer bo = ByteBuffer.wrap(arr).order(ByteOrder.LITTLE_ENDIAN);
@@ -78,47 +78,47 @@ public class BitmapInfoHeader {
 		return colorImportant;
 	}
 
-	void setSize(int size) {
+	void setSize(final int size) {
 		this.size = size;
 	}
 
-	void setWidth(int width) {
+	void setWidth(final int width) {
 		this.width = width;
 	}
 
-	void setHeight(int height) {
+	void setHeight(final int height) {
 		this.height = height;
 	}
 
-	void setPlanes(short planes) {
+	void setPlanes(final short planes) {
 		this.planes = planes;
 	}
 
-	void setBitCount(short bitCount) {
+	void setBitCount(final short bitCount) {
 		this.bitCount = bitCount;
 	}
 
-	void setCompression(int compression) {
+	void setCompression(final int compression) {
 		this.compression = compression;
 	}
 
-	void setSizeImage(int sizeImage) {
+	void setSizeImage(final int sizeImage) {
 		this.sizeImage = sizeImage;
 	}
 
-	void setxPelsPerMeter(int xPelsPerMeter) {
+	void setxPelsPerMeter(final int xPelsPerMeter) {
 		this.xPelsPerMeter = xPelsPerMeter;
 	}
 
-	void setyPelsPerMeter(int yPelsPerMeter) {
+	void setyPelsPerMeter(final int yPelsPerMeter) {
 		this.yPelsPerMeter = yPelsPerMeter;
 	}
 
-	void setColorUsed(int colorUsed) {
+	void setColorUsed(final int colorUsed) {
 		this.colorUsed = colorUsed;
 	}
 
-	void setColorImportant(int colorImportant) {
+	void setColorImportant(final int colorImportant) {
 		this.colorImportant = colorImportant;
 	}
 
@@ -134,7 +134,7 @@ public class BitmapInfoHeader {
 		return "Image width: " + width + " pixels" + "\nImage Height: " + height + " pixels" + "\nColor planes: "
 				+ planes + "\nBits per pixel: " + bitCount() + "\nRaw data size: " + sizeImage + " bytes"
 				+ "\nPixels/meter horizontal: " + xPelsPerMeter + "\nPixels/meter vertical: " + yPelsPerMeter
-				+ (colorUsed == 0 ? "" : "\nColors in the palette: " + colorUsed) + "\n"
+				+ (colorUsed == 0 ? "" : "\nColos in the palette: " + colorUsed) + "\n"
 				+ (colorImportant == 0 ? "All colors are important." : "Important colors: " + colorImportant);
 	}
 

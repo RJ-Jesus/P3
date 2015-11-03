@@ -1,9 +1,9 @@
 package L_07;
 
-import L_07.lect7.ex01.AirLine;
-import L_07.lect7.ex01.AirLineMap;
-import L_07.lect7.ex01.Flight;
-import L_07.lect7.ex01.FlightList;
+import L_07.lect7.AirLine;
+import L_07.lect7.AirLineMap;
+import L_07.lect7.Flight;
+import L_07.lect7.FlightList;
 import rjj.util.Time;
 
 import java.io.*;

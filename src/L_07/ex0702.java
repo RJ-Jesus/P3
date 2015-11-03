@@ -1,6 +1,6 @@
 package L_07;
 
-import L_07.lect7.ex02.Bitmap;
+import rjj.bmp.Bitmap;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -24,7 +24,7 @@ public class ex0702 {
 			bm.save(saveName);
 			break;
 		case 3:
-			bm.flip();
+			bm.flipVertical();
 			saveName = saveImage(fname);
 			bm.save(saveName);
 			break;
