@@ -15,16 +15,16 @@ public class Bitmap {
 	private String path;
 	private double relationToOriginal;
 
-	public Bitmap(final String fname) throws IOException {
-		this(new File(fname));
-	}
-
 	public Bitmap(final File f) throws IOException {
 		this(new FileInputStream(f));
 		path = f.getAbsolutePath();
 	}
 
-	public Bitmap(final FileInputStream f) throws IOException {
+	public Bitmap(final String fName) throws IOException {
+		this(new File(fName));
+	}
+
+	private Bitmap(final FileInputStream f) throws IOException {
 		byte[] bStream = new byte[BitmapFileHeader.SIZE];
 		f.read(bStream);
 		bfh = new BitmapFileHeader(bStream);
@@ -48,6 +48,14 @@ public class Bitmap {
 			pixelData[i] = bStream;
 		}
 		relationToOriginal = 1;
+	}
+
+	private static int[] byteArrayToIntArray(final byte[] arr) {
+		int[] rtn = new int[arr.length / 3];
+		for (int i = 0; i < rtn.length; i++)
+			rtn[i] = (-1 << 24) | ((0xFF & arr[i * 3 + 2]) << 16) | ((0xFF & arr[i * 3 + 1]) << 8)
+					| (0xFF & (arr[i * 3]));
+		return rtn;
 	}
 
 	@Override
@@ -150,14 +158,6 @@ public class Bitmap {
 		BufferedImage picture = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_4BYTE_ABGR);
 		picture.setRGB(0, 0, getWidth(), getHeight(), byteArrayToIntArray(byteData()), 0, getWidth());
 		return picture;
-	}
-
-	private static int[] byteArrayToIntArray(final byte[] arr) {
-		int[] rtn = new int[arr.length / 3];
-		for (int i = 0; i < rtn.length; i++)
-			rtn[i] = (-1 << 24) | ((0xFF & arr[i * 3 + 2]) << 16) | ((0xFF & arr[i * 3 + 1]) << 8)
-					| (0xFF & (arr[i * 3]));
-		return rtn;
 	}
 
 	public byte[] byteData() {

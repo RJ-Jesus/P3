@@ -1,28 +1,24 @@
 package L_08.millionaire;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
 public class GUI {
 	private static final Dimension defaultDimension = new Dimension(200, 200);
-	private Questions questions;
-	private Question currentQuestion;
+    /* private JButton giveUp, confirm;    // These were made local */
+    private static Random rand = new Random();
+    private Questions questions;
+    private Question currentQuestion;
 	private JFrame frame;
 	private JLabel amount, picture;
 	private JTextArea questionText;
 	private JButton audience, phone, _50;
 	private JRadioButton a, b, c, d;
-	private JButton giveUp, confirm;
-	private static Random rand = new Random();
 
 	public GUI(final String questionsFName) throws IOException {
 		questions = new Questions(questionsFName);
@@ -43,10 +39,9 @@ public class GUI {
 		amount = new JLabel(String.valueOf(currentQuestion.getPrize()), SwingConstants.CENTER);
 		contentPane.add(amount, BorderLayout.PAGE_START);
 
-		picture = new JLabel(
-				new ImageIcon(ImageIO.read(new File(currentQuestion.getImgPath())).getScaledInstance(200, 200, 0)));
-		picture.setPreferredSize(defaultDimension);
-		contentPane.add(picture, BorderLayout.LINE_START);
+        picture = new JLabel(new ImageIcon(ImageIO.read(new File(currentQuestion.getImgPath())).getScaledInstance(200, 200, 0)));
+        picture.setPreferredSize(defaultDimension);
+        contentPane.add(picture, BorderLayout.LINE_START);
 
 		questionText = new JTextArea(currentQuestion.getQuestText());
 		questionText.setPreferredSize(defaultDimension);
@@ -76,10 +71,10 @@ public class GUI {
 		audience = new JButton("Audience");
 		phone = new JButton("Phone");
 		_50 = new JButton("50-50");
-		giveUp = new JButton("Give Up");
-		confirm = new JButton("Confirm");
-		JPanel helpPane = new JPanel();
-		helpPane.add(audience);
+        JButton giveUp = new JButton("Give Up");
+        JButton confirm = new JButton("Confirm");
+        JPanel helpPane = new JPanel();
+        helpPane.add(audience);
 		helpPane.add(phone);
 		helpPane.add(_50);
 		JPanel actionPane = new JPanel();
@@ -96,7 +91,7 @@ public class GUI {
                     if (isSolution(button))
                         try {
                             nextQuestionOrWin();
-                        } catch (IOException e1) {
+                        } catch (final IOException e1) {
                             e1.printStackTrace();
                             endGame();
                         }
@@ -141,9 +136,9 @@ public class GUI {
 		_50.setEnabled(false);
 	}
 
-	private boolean isSolution(JRadioButton button) {
-		return currentQuestion.getQuestAnswer().equals(getButtonText(button));
-	}
+    private boolean isSolution(final JRadioButton button) {
+        return currentQuestion.getQuestAnswer().equals(getButtonText(button));
+    }
 
 	private void phone() {
 		JRadioButton[] arr = new JRadioButton[2];
@@ -160,10 +155,10 @@ public class GUI {
 		JOptionPane.showMessageDialog(frame.getContentPane(), textMessage);
 		phone.setEnabled(false);
 	}
-	
-	private String getButtonText(JRadioButton b){
-		String buttonText = b.getText();
-		return buttonText.substring(6, buttonText.length() - 7);
+
+    private String getButtonText(final JRadioButton b) {
+        String buttonText = b.getText();
+        return buttonText.substring(6, buttonText.length() - 7);
 	}
 
 	private void audience() {

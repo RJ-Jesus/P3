@@ -9,21 +9,21 @@ public class Questions {
 	private final Question[] questions;
 	private int idx;
 
-	public Questions(final String fname) throws IOException {
+	public Questions(final String fName) throws IOException {
 		LinkedList<Question> tmp = new LinkedList<>();
-		Parser.parse(tmp, fname);
+		Parser.parse(tmp, fName);
 		this.questions = Parser.sort(tmp.toArray(new Question[tmp.size()]));
 		applyPrizes(this);
 	}
 
-	public Question getQuestion() {
-		return idx < questions.length ? questions[idx++] : null;
-	}
-
-	private static void applyPrizes(Questions quests) {
+	private static void applyPrizes(final Questions quests) {
 		int i = 0;
 		for (Question q : quests.questions)
 			q.setPrize(prizes[i++]);
+	}
+
+	public Question getQuestion() {
+		return idx < questions.length ? questions[idx++] : null;
 	}
 	
 	public int lastQuestionPrize(){

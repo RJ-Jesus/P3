@@ -8,7 +8,7 @@ public class Question implements Comparable<Question> {
 	private int difficulty;
 	private int prize;
 
-	public Question(String imgPath, String questText, String questAnswer, int difficulty, String... options) {
+	public Question(final String imgPath, final String questText, final String questAnswer, final int difficulty, final String... options) {
 		this.imgPath = imgPath;
 		this.questText = questText;
 		this.questAnswer = questAnswer;
@@ -50,7 +50,7 @@ public class Question implements Comparable<Question> {
 		return prize;
 	}
 
-	void setPrize(int prize) {
+	void setPrize(final int prize) {
 		this.prize = prize;
 	}
 

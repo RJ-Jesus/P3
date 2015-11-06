@@ -11,15 +11,15 @@ import java.util.Random;
 public class Parser {
     private static Random rand = new Random();
 
-	static void parse(Collection<Question> q, String fname) throws IOException{
-		parse(q, new File(fname));
+	static void parse(final Collection<Question> q, final String fName) throws IOException {
+		parse(q, new File(fName));
 	}
-	
-	static void parse(Collection<Question> q, File f) throws IOException{
+
+	static void parse(final Collection<Question> q, final File f) throws IOException {
 		parse(q, new FileReader(f));
 	}
-	
-	static void parse(Collection<Question> q, FileReader f) throws IOException{
+
+	static void parse(final Collection<Question> q, final FileReader f) throws IOException {
 		BufferedReader br = new BufferedReader(f);
 		String line = br.readLine();
 		while(line != null && !line.equals("")){
@@ -30,7 +30,7 @@ public class Parser {
 		br.close();
 	}
 
-	static <T> T[] scrambleArray(T[] ops) {
+	static <T> T[] scrambleArray(final T[] ops) {
 		T tmp;
 		for (int i = ops.length - 1, idx; i > 0; i--) {
 			idx = rand.nextInt(i + 1);
@@ -41,7 +41,7 @@ public class Parser {
 		return ops;
 	}
 
-	static <T extends Comparable<? super T>> T[] sort(T[] arr){
+	static <T extends Comparable<? super T>> T[] sort(final T[] arr) {
 		Arrays.sort(arr);
 		return arr;
 	}

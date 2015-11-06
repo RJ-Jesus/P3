@@ -1,10 +1,10 @@
 package L_08.tictactoe;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class TicTacToeGame {
 	private JFrame frame;
@@ -13,9 +13,9 @@ public class TicTacToeGame {
 	private boolean isFinished;
 	private Player winner;
 
-	public TicTacToeGame(Player firstPlayer) {
-		frame = new JFrame("Tic-Tac-Toe Game");
-		frame.setPreferredSize(new Dimension(240, 240));
+    public TicTacToeGame(final Player firstPlayer) {
+        frame = new JFrame("Tic-Tac-Toe Game");
+        frame.setPreferredSize(new Dimension(240, 240));
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(3, 3));
 		player = firstPlayer;
@@ -49,11 +49,16 @@ public class TicTacToeGame {
 
 	private boolean isFull() {
 		for (int i = 0, c = 0, size = board.length; i < size; i++) {
-			for (TicTacToeButton player : board[i])
-				if (player.getPlayer() != null)
+            /*for (TicTacToeButton player : board[i])
+                if (player.getPlayer() != null)
 					c++;
 				else
-					break;
+					break;*/
+            for (Object player : Arrays.stream(board[i]).map(TicTacToeButton::getPlayer).toArray())
+                if (player != null)
+                    c++;
+                else
+                    break;
 			if (c == size * size)
 				return true;
 		}
@@ -95,10 +100,18 @@ public class TicTacToeGame {
 		return false;
 	}
 
+    public enum Player {
+        X, O;
+        static final int size = values().length;
+
+        Player other() {
+            return values()[(this.ordinal() + 1) % size];
+        }
+    }
+
     private class TicTacToeButton extends JButton implements ActionListener {
-		private static final long serialVersionUID = 1L;
-		private Player player;
 		private final int i, j;
+        private Player player;
 
 		TicTacToeButton(final int i, final int j) {
 			super();
@@ -119,7 +132,7 @@ public class TicTacToeGame {
 		}
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(final ActionEvent e) {
             if (!play(i, j))
                 if (winner != null)
                     javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), winner + " has won!");
@@ -131,14 +144,5 @@ public class TicTacToeGame {
                 javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), winner + " has won!");
         }
     }
-
-	public enum Player {
-		X, O;
-		static final int size = values().length;
-
-		Player other() {
-			return values()[(this.ordinal() + 1) % size];
-		}
-	}
 
 }
