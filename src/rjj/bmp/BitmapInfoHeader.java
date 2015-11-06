@@ -134,7 +134,7 @@ public class BitmapInfoHeader {
 		return "Image width: " + width + " pixels" + "\nImage Height: " + height + " pixels" + "\nColor planes: "
 				+ planes + "\nBits per pixel: " + bitCount() + "\nRaw data size: " + sizeImage + " bytes"
 				+ "\nPixels/meter horizontal: " + xPelsPerMeter + "\nPixels/meter vertical: " + yPelsPerMeter
-				+ (colorUsed == 0 ? "" : "\nColos in the palette: " + colorUsed) + "\n"
+				+ (colorUsed == 0 ? "" : "\nColors in the palette: " + colorUsed) + "\n"
 				+ (colorImportant == 0 ? "All colors are important." : "Important colors: " + colorImportant);
 	}
 

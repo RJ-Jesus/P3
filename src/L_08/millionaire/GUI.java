@@ -10,16 +10,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class GUI {
 	private static final Dimension defaultDimension = new Dimension(200, 200);
@@ -31,20 +22,19 @@ public class GUI {
 	private JButton audience, phone, _50;
 	private JRadioButton a, b, c, d;
 	private JButton giveUp, confirm;
-	private final Random rand;
+	private static Random rand = new Random();
 
 	public GUI(final String questionsFName) throws IOException {
 		questions = new Questions(questionsFName);
 		currentQuestion = questions.getQuestion();
-		rand = new Random();
 		frame = new JFrame("QQSM");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		initiateGUI(frame.getContentPane());
 		frame.pack();
 		frame.setVisible(true);
 	}
 
-	private void initiateGUI(Container contentPane) throws IOException {
+	private void initiateGUI(final Container contentPane) throws IOException {
 		if (!(contentPane.getLayout() instanceof BorderLayout)) {
 			contentPane.add(new JLabel("Container doesn't use BorderLayout!"));
 			return;

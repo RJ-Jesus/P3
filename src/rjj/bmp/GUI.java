@@ -20,7 +20,7 @@ public class GUI implements ActionListener {
 		frame = new JFrame(title);
 		initiateGUI(frame.getContentPane());
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
 

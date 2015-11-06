@@ -12,7 +12,7 @@ public class Questions {
 	public Questions(final String fname) throws IOException {
 		LinkedList<Question> tmp = new LinkedList<>();
 		Parser.parse(tmp, fname);
-		this.questions = Parser.randSort(tmp.toArray(new Question[tmp.size()]));
+		this.questions = Parser.sort(tmp.toArray(new Question[tmp.size()]));
 		applyPrizes(this);
 	}
 

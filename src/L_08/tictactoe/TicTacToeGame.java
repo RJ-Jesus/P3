@@ -16,7 +16,7 @@ public class TicTacToeGame {
 	public TicTacToeGame(Player firstPlayer) {
 		frame = new JFrame("Tic-Tac-Toe Game");
 		frame.setPreferredSize(new Dimension(240, 240));
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setLayout(new GridLayout(3, 3));
 		player = firstPlayer;
 		board = new TicTacToeButton[3][3];
@@ -95,27 +95,17 @@ public class TicTacToeGame {
 		return false;
 	}
 
-	private class TicTacToeButton extends JButton {
+    private class TicTacToeButton extends JButton implements ActionListener {
 		private static final long serialVersionUID = 1L;
 		private Player player;
+		private final int i, j;
 
 		TicTacToeButton(final int i, final int j) {
 			super();
-			setFont(new Font(getFont().getName(), 1, 40));
+            this.i = i; this.j = j;
+			setFont(new Font(getFont().getName(), Font.BOLD, 40));
 			setForeground(Color.WHITE);
-			this.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if (!play(i, j))
-						if (winner != null)
-							javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), winner + " has won!");
-						else if (isFinished)
-							javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), "Game ended as a tie.");
-						else
-							javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), "Can't play there.");
-					else if (winner != null)
-						javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), winner + " has won!");
-				}
-			});
+			this.addActionListener(this);
 			frame.add(this);
 		}
 
@@ -123,12 +113,24 @@ public class TicTacToeGame {
 			return player;
 		}
 
-		void setPlayer(Player player) {
+		void setPlayer(final Player player) {
 			this.player = player;
 			setText(player.toString());
 		}
 
-	}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!play(i, j))
+                if (winner != null)
+                    javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), winner + " has won!");
+                else if (isFinished)
+                    javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), "Game ended as a tie.");
+                else
+                    javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), "Can't play there.");
+            else if (winner != null)
+                javax.swing.JOptionPane.showMessageDialog(frame.getContentPane(), winner + " has won!");
+        }
+    }
 
 	public enum Player {
 		X, O;
