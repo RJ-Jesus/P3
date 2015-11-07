@@ -51,7 +51,7 @@ public class Flight {
     public String toString() {
         return time.toString().substring(0, 5) + "\t" +
                 airLine.getInitials() +
-                (Character.isAlphabetic(flightNumber.charAt(0)) ? "" : " " ) + flightNumber + "\t" +
+                (Character.isAlphabetic(flightNumber.charAt(0)) ? "" : " ") + flightNumber + "\t" +
                 airLine.getName() + "\t" +
                 origin + '\t' +
                 (delay.equals(new Time(0, 0, 0)) ? "" : delay.toString().substring(0, 5) + "\t" + "Expected arrival: "

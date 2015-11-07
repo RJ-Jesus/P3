@@ -11,11 +11,11 @@ public class Person implements Comparable<Person> {
     private int phoneNumber;
 
     public Person(final String name, final int ccNumber, final Date birthday, final int phoneNumber) {
-        if(name == null)
+        if (name == null)
             throw new IllegalArgumentException("Name is null.");
-        if(ccNumber < 0 || ccNumber > 99999999)
+        if (ccNumber < 0 || ccNumber > 99999999)
             throw new IllegalArgumentException("Invalid citizen's card number.");
-        if(birthday == null)
+        if (birthday == null)
             throw new IllegalArgumentException("Birthday is null.");
         if (phoneNumber < 100000000 || phoneNumber > 999999999)
             throw new IllegalArgumentException("Invalid phone number.");

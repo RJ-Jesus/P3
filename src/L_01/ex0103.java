@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class ex0103 {
     static final Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         Point center;
         System.out.print("Shape (circle, rectangle, square): ");

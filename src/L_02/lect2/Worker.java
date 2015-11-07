@@ -9,9 +9,9 @@ public class Worker extends User {
         super(name, ccNumber, birthday, joiningDate);
         if (nWorker < 0)
             throw new IllegalArgumentException("Worker ID cannot be a negative number.");
-        if(NIF < 0)
+        if (NIF < 0)
             throw new IllegalArgumentException("N.I.F. cannot be a negative value.");
-        if(NIF > 999999999)
+        if (NIF > 999999999)
             throw new IllegalArgumentException("N.I.F. are 9 digits long.");
         this.nWorker = nWorker;
         this.NIF = NIF;

@@ -8,9 +8,9 @@ public class Student extends User {
 
     public Student(final String name, final int ccNumber, final Date birthday, final Date joiningDate, final int nMec, final String course) {
         super(name, ccNumber, birthday, joiningDate);
-        if(course == null)
+        if (course == null)
             throw new IllegalArgumentException("Course can't be null.");
-        if(nMec < 0)
+        if (nMec < 0)
             throw new IllegalArgumentException("Nº Mec can't be negative.");
         if (nMec > 99999)
             throw new IllegalArgumentException("Nº Mec is only a 5 digit long value for now.");

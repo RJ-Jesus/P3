@@ -12,9 +12,9 @@ public class Movie {
     public Movie(final String title, final Category category, final Age age) {
         if (title == null)
             throw new IllegalArgumentException("Name can't be null.");
-        if(category == null)
+        if (category == null)
             throw new IllegalArgumentException("Category can't be null.");
-        if(age == null)
+        if (age == null)
             throw new IllegalArgumentException("Age can't be null.");
         id = counter++;
         this.title = title;

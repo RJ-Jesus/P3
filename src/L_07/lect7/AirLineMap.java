@@ -9,7 +9,7 @@ public class AirLineMap extends HashMap<String, AirLine> {
 
     public static AirLineMap loadFile(final FileReader f) {
         AirLineMap rtn = new AirLineMap();
-        try(BufferedReader reader = new BufferedReader(f)) {
+        try (BufferedReader reader = new BufferedReader(f)) {
             String line = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split("\t");

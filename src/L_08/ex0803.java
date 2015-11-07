@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class ex0803 {
 
-	public static void main(String[] args) throws IOException {
-		new GUI();
-	}
+    public static void main(String[] args) throws IOException {
+        new GUI();
+    }
 
 }

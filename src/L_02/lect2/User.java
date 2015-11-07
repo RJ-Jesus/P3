@@ -10,7 +10,7 @@ public class User extends rjj.human.Person {
 
     public User(final String name, final int ccNumber, final Date birthday, final Date joiningDate) {
         super(name, ccNumber, birthday, 0);
-        if(joiningDate == null)
+        if (joiningDate == null)
             throw new IllegalArgumentException("Joining date cannot be null.");
         id = counter++;
         this.joiningDate = joiningDate;

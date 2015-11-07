@@ -10,30 +10,30 @@ public class GUI {
     private static final String title = "BMP Viewer";
     private Bitmap picture;
     private JLabel pic_label;
-	private JFrame frame;
+    private JFrame frame;
     /* private JMenuItem open, save, save_as, flip_v, flip_h, resize;   // This were made local */
     private JFileChooser fc;
 
-	public GUI() throws IOException {
-		frame = new JFrame(title);
-		initiateGUI(frame.getContentPane());
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
+    public GUI() throws IOException {
+        frame = new JFrame(title);
+        initiateGUI(frame.getContentPane());
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
 
-	private void initiateGUI(final Container content) {
-		fc = new JFileChooser();
-		fc.setFileFilter(new FileNameExtensionFilter("Bitmap", "bmp", "dib"));
+    private void initiateGUI(final Container content) {
+        fc = new JFileChooser();
+        fc.setFileFilter(new FileNameExtensionFilter("Bitmap", "bmp", "dib"));
 
-		JMenuBar m_bar = new JMenuBar();
+        JMenuBar m_bar = new JMenuBar();
 
-		JMenu file = new JMenu("File");
-		file.setMnemonic(KeyEvent.VK_F);
-		m_bar.add(file);
-		JMenu image = new JMenu("Image");
-		image.setMnemonic(KeyEvent.VK_I);
-		m_bar.add(image);
+        JMenu file = new JMenu("File");
+        file.setMnemonic(KeyEvent.VK_F);
+        m_bar.add(file);
+        JMenu image = new JMenu("Image");
+        image.setMnemonic(KeyEvent.VK_I);
+        m_bar.add(image);
 
         JMenuItem open = new JMenuItem("Open file...");
         open.addActionListener(e -> {
@@ -100,19 +100,19 @@ public class GUI {
         });
         image.add(resize);
 
-		content.add(m_bar, BorderLayout.PAGE_START);
-	}
+        content.add(m_bar, BorderLayout.PAGE_START);
+    }
 
-	private void drawImage(final Container content) {
-		try {
-			content.remove(pic_label);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
+    private void drawImage(final Container content) {
+        try {
+            content.remove(pic_label);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
             System.err.println("Tl;dr: This NullPointer might be because no other image was previously set.");
         }
         pic_label = new JLabel(new ImageIcon(picture.toBufferedImage()));
-		content.add(pic_label, BorderLayout.CENTER);
-		frame.setTitle(title + String.format(" - %.2f%%", picture.getRelation() * 100));
-		frame.setVisible(true);
-	}
+        content.add(pic_label, BorderLayout.CENTER);
+        frame.setTitle(title + String.format(" - %.2f%%", picture.getRelation() * 100));
+        frame.setVisible(true);
+    }
 }

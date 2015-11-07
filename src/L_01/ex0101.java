@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class ex0101 {
     static final Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         System.out.print("String: ");
         StringUtils s = new StringUtils(sc.nextLine());

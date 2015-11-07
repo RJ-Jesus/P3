@@ -20,25 +20,25 @@ public class ex0701 {
         File infoPublic_bin_f = new File("src/L_07/Static.d/aula7_resultados/Infopublico.bin");
 
         AirLineMap airLines = AirLineMap.loadFile(airLines_f);
-        if(airLines == null)
+        if (airLines == null)
             throw new NullPointerException("Couldn't parse airlines.");
 
         FlightList flights = FlightList.loadFile(flights_f, airLines);
-        if(flights == null)
+        if (flights == null)
             throw new NullPointerException("Couldn't parse flights.");
 
         flights.saveFile(infoPublic_f);
 
         Map<AirLine, Time> delaysMap = flights.averageDelays(airLines);
         System.out.println("Company\tAverage Time");
-        for(Map.Entry<AirLine, Time> entry : delaysMap.entrySet())
+        for (Map.Entry<AirLine, Time> entry : delaysMap.entrySet())
             System.out.println(entry.getKey() + " <-> " + entry.getValue());
 
         flights.writeCities(cities_f);
 
         System.out.println("Could save binary file: " + saveFileBinary(infoPublic_bin_f, flights));
         List<String> l = readFileBinary(infoPublic_bin_f);
-        if(l != null) {
+        if (l != null) {
             System.out.println("Reading of binary file result:");
             l.forEach(System.out::println);
         }
@@ -48,7 +48,7 @@ public class ex0701 {
     public static boolean saveFileBinary(final File f, final FlightList fl) {
         try (RandomAccessFile raf = new RandomAccessFile(f, "rw")) {
             raf.writeBytes("Hora\tVoo\tCompanhia\tOrigem\tAtraso\tObs\n");
-            for(Flight flight : fl)
+            for (Flight flight : fl)
                 raf.writeBytes(flight + "\n");
             return true;
         } catch (IOException e) {
@@ -61,7 +61,7 @@ public class ex0701 {
         List<String> l = new LinkedList<>();
         try (RandomAccessFile raf = new RandomAccessFile(f, "r")) {
             String line;
-            while((line = raf.readLine()) != null)
+            while ((line = raf.readLine()) != null)
                 l.add(line);
             return l;
         } catch (IOException e) {

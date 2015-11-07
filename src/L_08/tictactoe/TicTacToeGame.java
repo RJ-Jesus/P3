@@ -7,48 +7,48 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class TicTacToeGame {
-	private JFrame frame;
-	private Player player;
-	private TicTacToeButton[][] board;
-	private boolean isFinished;
-	private Player winner;
+    private JFrame frame;
+    private Player player;
+    private TicTacToeButton[][] board;
+    private boolean isFinished;
+    private Player winner;
 
     public TicTacToeGame(final Player firstPlayer) {
         frame = new JFrame("Tic-Tac-Toe Game");
         frame.setPreferredSize(new Dimension(240, 240));
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		frame.setLayout(new GridLayout(3, 3));
-		player = firstPlayer;
-		board = new TicTacToeButton[3][3];
-		for (int i = 0, size = board.length; i < size; i++)
-			for (int j = 0; j < size; j++)
-				board[i][j] = new TicTacToeButton(i, j);
-		frame.pack();
-		frame.setVisible(true);
-	}
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setLayout(new GridLayout(3, 3));
+        player = firstPlayer;
+        board = new TicTacToeButton[3][3];
+        for (int i = 0, size = board.length; i < size; i++)
+            for (int j = 0; j < size; j++)
+                board[i][j] = new TicTacToeButton(i, j);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
-	private boolean play(final int i, final int j) {
-		if (isFinished)
-			return false;
-		if (board[i][j].getPlayer() != null)
-			return false;
-		board[i][j].setPlayer(player);
-		board[i][j].setBackground(new Color(153, 204, 255));
-		if (!(isFinished = isFinished(i, j)))
-			player = player.other();
-		return true;
-	}
+    private boolean play(final int i, final int j) {
+        if (isFinished)
+            return false;
+        if (board[i][j].getPlayer() != null)
+            return false;
+        board[i][j].setPlayer(player);
+        board[i][j].setBackground(new Color(153, 204, 255));
+        if (!(isFinished = isFinished(i, j)))
+            player = player.other();
+        return true;
+    }
 
-	private boolean isFinished(final int i, final int j) {
-		if (checkWinInRow(i) || checkWinInCol(j) || checkWinInDia(i, j)) {
-			winner = player;
-			return true;
-		}
-		return isFull();
-	}
+    private boolean isFinished(final int i, final int j) {
+        if (checkWinInRow(i) || checkWinInCol(j) || checkWinInDia(i, j)) {
+            winner = player;
+            return true;
+        }
+        return isFull();
+    }
 
-	private boolean isFull() {
-		for (int i = 0, c = 0, size = board.length; i < size; i++) {
+    private boolean isFull() {
+        for (int i = 0, c = 0, size = board.length; i < size; i++) {
             /*for (TicTacToeButton player : board[i])
                 if (player.getPlayer() != null)
 					c++;
@@ -59,46 +59,46 @@ public class TicTacToeGame {
                     c++;
                 else
                     break;
-			if (c == size * size)
-				return true;
-		}
-		return false;
-	}
+            if (c == size * size)
+                return true;
+        }
+        return false;
+    }
 
-	private boolean checkWinInRow(final int i) {
-		int j = 0, size = board[0].length;
-		for (; j < size; j++)
-			if (!player.equals(board[i][j].getPlayer()))
-				break;
-		return j == size;
-	}
+    private boolean checkWinInRow(final int i) {
+        int j = 0, size = board[0].length;
+        for (; j < size; j++)
+            if (!player.equals(board[i][j].getPlayer()))
+                break;
+        return j == size;
+    }
 
-	private boolean checkWinInCol(final int j) {
-		int i = 0, size = board.length;
-		for (; i < size; i++)
-			if (!player.equals(board[i][j].getPlayer()))
-				break;
-		return i == size;
-	}
+    private boolean checkWinInCol(final int j) {
+        int i = 0, size = board.length;
+        for (; i < size; i++)
+            if (!player.equals(board[i][j].getPlayer()))
+                break;
+        return i == size;
+    }
 
-	private boolean checkWinInDia(final int i, final int j) {
-		if (i != j && i != board.length - 1 - j)
-			return false;
-		Player middlePlayer = board[1][1].getPlayer();
-		for (int k = 0, size = board.length; k < size && middlePlayer != null; k++) {
-			if (!middlePlayer.equals(board[k][k].getPlayer()))
-				break;
-			if (k == size - 1)
-				return true;
-		}
-		for (int k = 0, size = board.length; k < size && middlePlayer != null; k++) {
-			if (!middlePlayer.equals(board[k][size - 1 - k].getPlayer()))
-				break;
-			if (k == size - 1)
-				return true;
-		}
-		return false;
-	}
+    private boolean checkWinInDia(final int i, final int j) {
+        if (i != j && i != board.length - 1 - j)
+            return false;
+        Player middlePlayer = board[1][1].getPlayer();
+        for (int k = 0, size = board.length; k < size && middlePlayer != null; k++) {
+            if (!middlePlayer.equals(board[k][k].getPlayer()))
+                break;
+            if (k == size - 1)
+                return true;
+        }
+        for (int k = 0, size = board.length; k < size && middlePlayer != null; k++) {
+            if (!middlePlayer.equals(board[k][size - 1 - k].getPlayer()))
+                break;
+            if (k == size - 1)
+                return true;
+        }
+        return false;
+    }
 
     public enum Player {
         X, O;
@@ -110,26 +110,27 @@ public class TicTacToeGame {
     }
 
     private class TicTacToeButton extends JButton implements ActionListener {
-		private final int i, j;
+        private final int i, j;
         private Player player;
 
-		TicTacToeButton(final int i, final int j) {
-			super();
-            this.i = i; this.j = j;
-			setFont(new Font(getFont().getName(), Font.BOLD, 40));
-			setForeground(Color.WHITE);
-			this.addActionListener(this);
-			frame.add(this);
-		}
+        TicTacToeButton(final int i, final int j) {
+            super();
+            this.i = i;
+            this.j = j;
+            setFont(new Font(getFont().getName(), Font.BOLD, 40));
+            setForeground(Color.WHITE);
+            this.addActionListener(this);
+            frame.add(this);
+        }
 
-		Player getPlayer() {
-			return player;
-		}
+        Player getPlayer() {
+            return player;
+        }
 
-		void setPlayer(final Player player) {
-			this.player = player;
-			setText(player.toString());
-		}
+        void setPlayer(final Player player) {
+            this.player = player;
+            setText(player.toString());
+        }
 
         @Override
         public void actionPerformed(final ActionEvent e) {

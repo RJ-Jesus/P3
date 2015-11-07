@@ -6,7 +6,7 @@ public class Time implements Comparable<Time> {
     private long seconds;
 
     public Time(final long time) {
-        if(time < 0 || time > 24 * 3600 - 1)
+        if (time < 0 || time > 24 * 3600 - 1)
             throw new IllegalArgumentException("Invalid time stamp.");
         this.seconds = time;
     }
@@ -41,6 +41,14 @@ public class Time implements Comparable<Time> {
         return rtn;
     }
 
+    public static Time averageTime(final Time... t) {
+        if (t.length == 0)
+            return null;
+        Time rtn = addTimes(t);
+        rtn.seconds = Math.round((double) rtn.seconds / t.length);
+        return rtn;
+    }
+
     public long getHours() {
         return seconds / 3600;
     }
@@ -56,14 +64,6 @@ public class Time implements Comparable<Time> {
     public void addTime(final Time t) {
         Objects.requireNonNull(t, "Invalid time.");
         this.seconds = (this.seconds + t.seconds) % (24 * 3600 - 1);
-    }
-
-    public static Time averageTime(final Time... t) {
-        if(t.length == 0)
-            return null;
-        Time rtn = addTimes(t);
-        rtn.seconds = Math.round((double) rtn.seconds / t.length);
-        return rtn;
     }
 
     @Override

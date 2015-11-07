@@ -1,57 +1,57 @@
 package L_08.millionaire;
 
 public class Question implements Comparable<Question> {
-	private String imgPath;
-	private String questText;
-	private String questAnswer;
-	private String[] options;
-	private int difficulty;
-	private int prize;
+    private String imgPath;
+    private String questText;
+    private String questAnswer;
+    private String[] options;
+    private int difficulty;
+    private int prize;
 
-	public Question(final String imgPath, final String questText, final String questAnswer, final int difficulty, final String... options) {
-		this.imgPath = imgPath;
-		this.questText = questText;
-		this.questAnswer = questAnswer;
-		this.difficulty = difficulty;
-		this.options = Parser.scrambleArray(options);
-	}
+    public Question(final String imgPath, final String questText, final String questAnswer, final int difficulty, final String... options) {
+        this.imgPath = imgPath;
+        this.questText = questText;
+        this.questAnswer = questAnswer;
+        this.difficulty = difficulty;
+        this.options = Parser.scrambleArray(options);
+    }
 
-	String getImgPath() {
-		return imgPath;
-	}
+    String getImgPath() {
+        return imgPath;
+    }
 
-	String getQuestText() {
-		return questText;
-	}
+    String getQuestText() {
+        return questText;
+    }
 
-	String getQuestAnswer() {
-		return questAnswer;
-	}
+    String getQuestAnswer() {
+        return questAnswer;
+    }
 
-	String[] getOptions() {
-		return options;
-	}
-	
-	String getOption(final int i) {
-		return options[i];
-	}
+    String[] getOptions() {
+        return options;
+    }
 
-	int getDifficulty() {
-		return difficulty;
-	}
+    String getOption(final int i) {
+        return options[i];
+    }
 
-	@Override
-	public int compareTo(final Question q) {
-		int thisVal = difficulty, otherVal = q.difficulty;
-		return thisVal < otherVal ? -1 : (thisVal == otherVal ? 0 : 1);
-	}
+    int getDifficulty() {
+        return difficulty;
+    }
 
-	int getPrize() {
-		return prize;
-	}
+    @Override
+    public int compareTo(final Question q) {
+        int thisVal = difficulty, otherVal = q.difficulty;
+        return thisVal < otherVal ? -1 : (thisVal == otherVal ? 0 : 1);
+    }
 
-	void setPrize(final int prize) {
-		this.prize = prize;
-	}
+    int getPrize() {
+        return prize;
+    }
+
+    void setPrize(final int prize) {
+        this.prize = prize;
+    }
 
 }
