@@ -11,7 +11,7 @@ public class DynamicArray<E> implements Iterable<E> {
 
     public boolean add(final E elem) {
         if (isFull())
-            arr = Arrays.copyOf(arr, arr.length + ALLOC);
+            arr = Arrays.copyOf(arr, size + ALLOC);
         arr[size++] = elem;
         return true;
     }
