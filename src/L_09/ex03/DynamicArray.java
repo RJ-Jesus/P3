@@ -1,11 +1,11 @@
 package L_09.ex03;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class DynamicArray<E> implements Iterable<E> {
     private final int ALLOC = 50;
+    @SuppressWarnings("unchecked")
     private E[] arr = (E[]) new Object[ALLOC];
     private int size;
 
@@ -46,11 +46,11 @@ public class DynamicArray<E> implements Iterable<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public BFIterator<E> iterator() {
         return new Itr();
     }
 
-    private class Itr implements Iterator<E> {
+    private class Itr implements BFIterator<E> {
         private int idx;
 
         @Override
@@ -66,13 +66,13 @@ public class DynamicArray<E> implements Iterable<E> {
         }
 
         public boolean hasPrevious() {
-            return idx >= 0;
+            return idx > 0;
         }
 
         public E previous() {
             if (!hasPrevious())
                 throw new NoSuchElementException("No element.");
-            return arr[idx--];
+            return arr[--idx];
         }
     }
 }

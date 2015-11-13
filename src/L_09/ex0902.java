@@ -14,9 +14,7 @@ public class ex0902 {
         ice.base(1);
         ice = new Topping(new Cone(new SimpleIceCream("Strawberry")), "Fruit");
         ice.base(2);
-        ice = new Topping(
-                new Topping(
-                        new Cup(new SimpleIceCream("Mango")), "Chocolate"), "Cream");
+        ice = new Topping(new Topping(new Cup(new SimpleIceCream("Mango")), "Chocolate"), "Cream");
         ice.base(4);
         ice = new Topping(ice, "Chips");
         ice.base(3);

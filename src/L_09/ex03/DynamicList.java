@@ -1,14 +1,16 @@
 package L_09.ex03;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class DynamicList<E> implements Iterable<E> {
-    private Node<E> top;
+    private Node<E> first;
     private int size;
 
     public boolean add(final E elem) {
-        top = new Node<E>(elem, top);
+        if (isEmpty())
+            first = new Node<>(elem);
+        else
+            new Node<>(first, elem);
         size++;
         return true;
     }
@@ -16,33 +18,39 @@ public class DynamicList<E> implements Iterable<E> {
     public boolean remove(final E elem) {
         if (!isEmpty())
             if (elem == null) {
-                if (top.elem == null) {
-                    top = top.next;
+                if (first.elem == null) {
+                    first.next.prev = first.prev;
+                    first.prev.next = first = first.next;
                     size--;
                     return true;
                 }
-                Node<E> node = top;
-                while (node.next != null && node.next.elem != null)
+                Node<E> node = first.next;
+                while (node.next != first) {
+                    if (node.elem == null) {
+                        node.next.prev = node.prev;
+                        node.prev.next = node.next;
+                        size--;
+                        return true;
+                    }
                     node = node.next;
-                if (node.next != null) {
-                    node.next = node.next.next;
-                    size--;
-                    return true;
                 }
                 return false;
             } else {
-                if (elem.equals(top.elem)) {
-                    top = top.next;
+                if (elem.equals(first.elem)) {
+                    first.next.prev = first.prev;
+                    first.prev.next = first = first.next;
                     size--;
                     return true;
                 }
-                Node<E> node = top;
-                while (node.next != null && elem.equals(node.next.elem))
+                Node<E> node = first.next;
+                while (node.next != first) {
+                    if (elem.equals(node.elem)) {
+                        node.next.prev = node.prev;
+                        node.prev.next = node.next;
+                        size--;
+                        return true;
+                    }
                     node = node.next;
-                if (node.next != null) {
-                    node.next = node.next.next;
-                    size--;
-                    return true;
                 }
                 return false;
             }
@@ -58,47 +66,58 @@ public class DynamicList<E> implements Iterable<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public BFIterator<E> iterator() {
         return new Itr();
     }
 
     private static class Node<E> {
         E elem;
-        Node<E> next;
+        Node<E> next, prev;
 
-        Node(final E elem, final Node<E> node) {
+        Node(final E elem) {
             this.elem = elem;
-            next = node;
+            this.next = this.prev = this;
+        }
+
+        Node(final Node<E> node, final E elem) {
+            this.elem = elem;
+            this.prev = node.prev;
+            this.next = node;
+            node.prev.next = this;
+            node.prev = this;
         }
     }
 
-    private class Itr implements Iterator<E> {
-        Node<E> n = top;
-        DynamicList<E> reverse = new DynamicList<>();
+    private class Itr implements BFIterator<E> {
+        Node<E> n = first;
+        int counter;
 
         @Override
         public boolean hasNext() {
-            return n != null;
+            return counter < size;
         }
 
         @Override
         public E next() {
             if (!hasNext())
                 throw new NoSuchElementException("No element.");
-            E rtn = n.elem;
+            final E rtn = n.elem;
             n = n.next;
-            reverse.add(rtn);
+            counter++;
             return rtn;
         }
 
+        @Override
         public boolean hasPrevious() {
-            return reverse.size >= 0;
+            return counter > 0;
         }
 
+        @Override
         public E previous() {
             if (!hasPrevious())
                 throw new NoSuchElementException("No element.");
-            return null;
+            counter--;
+            return (n = n.prev).elem;
         }
     }
 }

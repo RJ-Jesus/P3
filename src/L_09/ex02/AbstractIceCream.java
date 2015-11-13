@@ -5,7 +5,7 @@ import java.util.Objects;
 public abstract class AbstractIceCream implements IceCream {
     private IceCream iceCream;
 
-    public AbstractIceCream(final IceCream iceCream) {
+    AbstractIceCream(final IceCream iceCream) {
         this.iceCream = Objects.requireNonNull(iceCream);
     }
 
