@@ -7,7 +7,7 @@ public class Compare {
 
     @SafeVarargs
     public static <E extends Comparable<? super E>> E findMax(final E... arr) {
-        if (arr.length == 0)
+        if (Objects.requireNonNull(arr, "Array is null.").length == 0)
             throw new IllegalArgumentException("Invalid array length.");
         E rtn = arr[0];
         for (E elem : arr)

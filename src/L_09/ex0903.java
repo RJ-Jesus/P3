@@ -1,8 +1,8 @@
 package L_09;
 
-import L_09.ex03.BFIterator;
-import L_09.ex03.DynamicArray;
-import L_09.ex03.DynamicList;
+import rjj.collections.BFIterator;
+import rjj.collections.DynamicArray;
+import rjj.collections.DynamicList;
 import rjj.human.Person;
 import rjj.util.Date;
 
