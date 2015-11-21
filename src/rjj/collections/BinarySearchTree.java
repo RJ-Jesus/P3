@@ -81,9 +81,7 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements Iterab
             node.right = remove(e, node.right);
         else {
             size--;
-            if (node.left == null && node.right == null)
-                return null;
-            else if (node.left == null)
+            if (node.left == null)
                 return node.right;
             else if (node.right == null)
                 return node.left;
