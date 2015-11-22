@@ -87,22 +87,50 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements Iterab
                 return node.left;
             else {
                 final Node<E> rtn = node.left;
-                visitAll((elem) -> add(elem, rtn), node.right);
+                visitInOrder((elem) -> add(elem, rtn), node.right);
                 return rtn;
             }
         }
         return node;
     }
 
-    public void visitAll(final Consumer<E> consumer) {
-        visitAll(consumer, root);
+    public void visitAll(final Consumer<? super E> consumer, final Mode mode) {
+        switch (mode) {
+            case PreOrder:
+                visitPreOrder(consumer, root);
+                break;
+            case InOrder:
+                visitInOrder(consumer, root);
+                break;
+            case PostOrder:
+                visitPostOrder(consumer, root);
+                break;
+            default:
+                throw new IllegalArgumentException("Undefined mode.");
+        }
     }
 
-    private void visitAll(final Consumer<E> consumer, final Node<E> node) {
+    private void visitPreOrder(final Consumer<? super E> consumer, final Node<E> node) {
         if (node != null) {
-            visitAll(consumer, node.left);
             consumer.accept(node.elem);
-            visitAll(consumer, node.right);
+            visitInOrder(consumer, node.left);
+            visitInOrder(consumer, node.right);
+        }
+    }
+
+    private void visitInOrder(final Consumer<? super E> consumer, final Node<E> node) {
+        if (node != null) {
+            visitInOrder(consumer, node.left);
+            consumer.accept(node.elem);
+            visitInOrder(consumer, node.right);
+        }
+    }
+
+    private void visitPostOrder(final Consumer<? super E> consumer, final Node<E> node) {
+        if (node != null) {
+            visitInOrder(consumer, node.left);
+            visitInOrder(consumer, node.right);
+            consumer.accept(node.elem);
         }
     }
 
@@ -113,8 +141,12 @@ public class BinarySearchTree<E extends Comparable<? super E>> implements Iterab
     @Override
     public Iterator<E> iterator() {
         final Queue<E> q = new ArrayDeque<>(size);
-        visitAll(q::add);
+        visitAll(q::add, Mode.InOrder);
         return q.iterator();
+    }
+
+    public enum Mode {
+        PreOrder, InOrder, PostOrder
     }
 
     private static class Node<E> {

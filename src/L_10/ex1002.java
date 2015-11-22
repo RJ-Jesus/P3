@@ -20,7 +20,7 @@ public class ex1002 {
         bst.remove(523);
         bst.remove(997);
         bst.remove(1000);
-        bst.visitAll(System.out::println);
+        bst.visitAll(System.out::println, BinarySearchTree.Mode.InOrder);
         System.out.printf("Effective total after removal: %d\n", bst.size());
     }
 }
