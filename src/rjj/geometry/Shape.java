@@ -2,6 +2,9 @@ package rjj.geometry;
 
 import rjj.util.Validate;
 
+import java.util.List;
+import java.util.Optional;
+
 public abstract class Shape implements Comparable<Shape> {
     private Point center;
 
@@ -9,6 +12,23 @@ public abstract class Shape implements Comparable<Shape> {
         if (center == null)
             throw new IllegalArgumentException("Center is null.");
         this.center = center;
+    }
+
+    public static Optional<? extends Shape> biggestArea(final List<? extends Shape> figs) {
+        return figs.parallelStream().max(Shape::compareTo);
+    }
+
+    public static Optional<? extends Shape> biggestPerimeter(final List<? extends Shape> figs) {
+        return figs.parallelStream().max((s1, s2) -> Double.compare(s1.perimeter(), s2.perimeter()));
+    }
+
+    public static double totalArea(final List<? extends Shape> figs) {
+        return figs.parallelStream().mapToDouble(Shape::area).reduce(0, Double::sum);
+    }
+
+    public static double totalArea(final List<? extends Shape> figs, final String type) throws ClassNotFoundException {
+        final Class c = Class.forName(type);
+        return figs.parallelStream().filter(s -> s.getClass().isInstance(c)).mapToDouble(Shape::area).reduce(0, Double::sum);
     }
 
     abstract public double area();
