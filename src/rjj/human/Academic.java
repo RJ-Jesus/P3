@@ -12,7 +12,7 @@ public class Academic extends Person {
     }
 
     public Academic(final String name, final int ccNumber, final Date birthday, final Date joiningDate) {
-        super(name, ccNumber, birthday, 0);
+        super(name, ccNumber, birthday, 999999999);
         nMec = counter++;
         this.joiningDate = joiningDate;
     }
